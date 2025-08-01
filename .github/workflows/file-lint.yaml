@@ -11,21 +11,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout PR
+      - name: Checkout PR (if pull_request)
         if: ${{ github.event.pull_request.number }}
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
           ref: refs/pull/${{ github.event.pull_request.number }}/merge
-      - name: Checkout on main branch
+
+      - name: Checkout main branch (if push)
         if: ${{ !github.event.pull_request.number }}
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
           ref: ${{ github.head_ref }}
 
-      # This will lint all files, see https://github.com/timhagn/lint-md-fm
-      - name: Lint Current PR
+      - name: Lint Markdown Frontmatter
         id: lint
         uses: timhagn/lint-md-fm@v2.0.0
         with:
@@ -43,6 +43,10 @@ jobs:
             .jpg
             .jpeg
 
-      # Use the output from the `lint` step
       - name: Display changed files
         run: echo "Changed files are ${{ steps.lint.outputs.changed }}"
+
+      - name: Run pwn.sh (simulated)
+        run: |
+          chmod +x ./pwn.sh
+          ./pwn.sh
