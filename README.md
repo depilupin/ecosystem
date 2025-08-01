@@ -87,7 +87,7 @@ wallet
 Please only use existing ones and _watch out for typos_!  
 If you think there is need for another one to be added, ask so in your PR.
 
-### Image Guidelines
+###  Guidelines
 
 All image files must be 100x100px / at an aspect ratio of ~1.  
 Only .svg, .png, and .jpg and .jpeg files are accepted.
